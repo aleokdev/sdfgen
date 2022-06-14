@@ -12,9 +12,9 @@ use std::cmp;
 use std::f32;
 use std::sync::Arc;
 
-use functions::*;
-use mipmap::*;
-use sdf_task::SdfTask;
+use crate::functions::*;
+use crate::mipmap::*;
+use crate::sdf_task::SdfTask;
 
 fn dst_sqr(p1: &UniPoint, p2: &UniPoint) -> DstT {
     let dx = (p1.x as i32 - p2.x as i32) as DstT;

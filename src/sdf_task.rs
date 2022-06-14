@@ -2,7 +2,7 @@ use std::cmp::Eq;
 use std::cmp::Ord;
 use std::cmp::Ordering;
 
-use sdf_algorithm::DstT;
+use crate::sdf_algorithm::DstT;
 
 #[derive(Copy, Clone)]
 pub struct SdfTask {

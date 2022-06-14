@@ -3,7 +3,7 @@ extern crate image;
 use self::image::GrayImage;
 use self::image::ImageBuffer;
 
-use functions::log2;
+use crate::functions::log2;
 
 pub struct Mipmap {
     pub images: Vec<GrayImage>,
@@ -68,10 +68,7 @@ impl Mipmap {
         topleft.y += 1;
         let mut length = Mipmap::get_pixel_size(level);
         length.v -= 2;
-        UniSquare {
-            topleft,
-            length,
-        }
+        UniSquare { topleft, length }
     }
     pub fn get_center(x: u32, y: u32, level: u8) -> UniPoint {
         let tl = Mipmap::get_position(x, y, level); // top left

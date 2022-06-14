@@ -5,6 +5,7 @@ authors = [
     "Constantin Berhard <sdfgen.8.enormator@xoxy.net>",
     "Brett Lajzer <brett@brettlajzer.com>",
 ]
+edition = "2021"
 
 [[bin]]
 name = "sdfgen"
