@@ -137,7 +137,7 @@ fn calculate_sdf_at_rec(
                     y,
                     dst_level,
                     best_dst_sqr,
-                    &child_task,
+                    child_task,
                     needed,
                     pxpos,
                 );

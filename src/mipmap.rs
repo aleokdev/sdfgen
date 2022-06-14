@@ -69,8 +69,8 @@ impl Mipmap {
         let mut length = Mipmap::get_pixel_size(level);
         length.v -= 2;
         UniSquare {
-            topleft: topleft,
-            length: length,
+            topleft,
+            length,
         }
     }
     pub fn get_center(x: u32, y: u32, level: u8) -> UniPoint {

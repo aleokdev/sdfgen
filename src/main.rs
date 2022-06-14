@@ -141,13 +141,13 @@ fn main() {
         );
     }
     let mipmap_arc = std::sync::Arc::new(mipmap);
-    let sdf = calculate_sdf(mipmap_arc.clone(), sdf_size);
+    let sdf = calculate_sdf(mipmap_arc, sdf_size);
     if verbose {
         println!("Doing a final color space conversion.");
     }
     let output_type = match parsed_opts.opt_str("type") {
         Some(s) => s,
-        None => format!("png"), // FIXME we don't really need "format!" here
+        None => "png".to_string(),
     };
     match output_type.as_ref() {
         "png" => {
