@@ -10,8 +10,9 @@ use image::GrayImage;
 
 use getopts::Options;
 
-use byteorder::{BigEndian, LittleEndian, WriteBytesExt};
+use byteorder::{LittleEndian, WriteBytesExt};
 
+use image::ImageEncoder;
 use sdfgen::functions::bit_compressor;
 use sdfgen::functions::bw_to_bits;
 use sdfgen::sdf_algorithm::calculate_sdf;
@@ -59,7 +60,6 @@ fn main() {
         println!("Loading input image '{}'.", input_image_name);
     }
     let mut img: GrayImage = image::open(input_image_name)
-        .ok()
         .expect("failed to load image")
         .to_luma8();
     {
@@ -185,7 +185,7 @@ fn main() {
             let outf = File::create(output_image_name).unwrap();
             let pngenc = image::codecs::png::PngEncoder::<std::fs::File>::new(outf);
             pngenc
-                .encode(sdf_u8.into_raw().as_ref(), w, h, image::ColorType::L8)
+                .write_image(sdf_u8.into_raw().as_ref(), w, h, image::ColorType::L8)
                 .unwrap();
         }
         // TODO: remove code duplication here
@@ -193,11 +193,7 @@ fn main() {
             let (w, h) = &sdf.dimensions();
             let mut buf = vec![];
 
-            let writer = if output_type == "u16" {
-                |b: &mut Vec<u8>, v| b.write_u16::<LittleEndian>(v)
-            } else {
-                |b: &mut Vec<u8>, v| b.write_u16::<BigEndian>(v)
-            };
+            let writer = |b: &mut Vec<u8>, v| b.write_u16::<LittleEndian>(v);
 
             for px in sdf.into_raw() {
                 let mut dst = px;
@@ -225,7 +221,7 @@ fn main() {
             } else {
                 let pngenc = image::codecs::png::PngEncoder::<std::fs::File>::new(outf);
                 pngenc
-                    .encode(buf.as_ref(), *w, *h, image::ColorType::L16)
+                    .write_image(buf.as_ref(), *w, *h, image::ColorType::L16)
                     .unwrap();
             }
         }

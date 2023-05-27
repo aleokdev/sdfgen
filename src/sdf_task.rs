@@ -19,9 +19,6 @@ impl PartialEq for SdfTask {
             && self.level == other.level
             && self.best_case_dst_sqr == other.best_case_dst_sqr
     }
-    fn ne(&self, other: &Self) -> bool {
-        !self.eq(other)
-    }
 }
 
 impl Eq for SdfTask {}

@@ -1,5 +1,4 @@
-//#![crate_type = "lib"]
-//#![crate_name = "sdfgen"]
+#![allow(clippy::unnecessary_cast)]
 
 pub mod functions;
 pub mod mipmap;

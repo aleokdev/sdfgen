@@ -173,9 +173,8 @@ fn calculate_sdf_at(mm: &Arc<Mipmap>, x: u32, y: u32, dst_level: u8) -> f64 {
 }
 
 fn idx2point<T: num::integer::Integer>(idx: T, width: T) -> (T, T) {
-    match num::integer::div_rem(idx, width) {
-        (y, x) => (x, y),
-    }
+    let (y, x) = num::integer::div_rem(idx, width);
+    (x, y)
 }
 
 #[test]
